@@ -1,0 +1,42 @@
+name: Deploy Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@646cdf48217256a3d0b80361c5a50727664284f2
+        with:
+          version: 6.28.0
+
+      - name: Setup NodeJS w/ caching
+        uses: actions/setup-node@v2
+        with:
+          node-version: '17.4'
+          cache: 'pnpm'
+
+      - name: Install Deps
+        run: pnpm install
+
+      - name: Build static blog
+        run: pnpm build
+
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ github.token }}
+          publish_dir: ./build
