@@ -26,10 +26,10 @@
 </div>
 
 <Giscus
-	repo="rellokio/blog"
-	repoId="R_kgDOG97Nxw"
+	repo="rellokio/rellokio.github.io"
+	repoId="R_kgDOG98cOA"
 	category="Posts"
-	categoryId="DIC_kwDOG97Nx84COAgK"
+	categoryId="DIC_kwDOG98cOM4COAhT"
 	mapping="title"
 	inputPosition="top"
 />
